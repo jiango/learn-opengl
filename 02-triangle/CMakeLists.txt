@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
 
 add_executable(02-triangle
         ${PROJECT_SOURCES}
+        resource.qrc
 )
 
 

@@ -6,27 +6,6 @@
 #include "MyOpenGLWidget.h"
 #include <QOpenGLFunctions>
 
-std::string vertexShaderSource =
-        R"(#version 330 core
-    layout (location=0) in vec3 aPos;
-    void main() {
-        gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-    }
-)";
-
-std::string fragmentShaderSource =
-        R"(#version 330 core
-    void main() {
-        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-    }
-)";
-
-std::string fragmentShaderSource2 =
-        R"(#version 330 core
-    void main() {
-        gl_FragColor = vec4(0.5, 0.5, 0.0, 1.0);
-    }
-)";
 unsigned int VAO[2];
 unsigned int VBO[2];
 QGLShaderProgram program;
@@ -59,7 +38,12 @@ void MyOpenGLWidget::initializeGL() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    glBindVertexArray(VAO[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
 
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
     glBindVertexArray(VAO[1]);
     glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
 
@@ -67,12 +51,12 @@ void MyOpenGLWidget::initializeGL() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    program.addShaderFromSourceCode(QGLShader::Vertex, vertexShaderSource.c_str());
-    program.addShaderFromSourceCode(QGLShader::Fragment, fragmentShaderSource.c_str());
+    program.addShaderFromSourceFile(QGLShader::Vertex, ":/shader/shader/triangle.vert");
+    program.addShaderFromSourceFile(QGLShader::Fragment, ":/shader/shader/triangle.frag");
     program.link();
 
-    program2.addShaderFromSourceCode(QGLShader::Vertex, vertexShaderSource.c_str());
-    program2.addShaderFromSourceCode(QGLShader::Fragment, fragmentShaderSource2.c_str());
+    program2.addShaderFromSourceFile(QGLShader::Vertex, ":/shader/shader/triangle.vert");
+    program2.addShaderFromSourceFile(QGLShader::Fragment, ":/shader/shader/triangle.frag");
     program2.link();
 }
 
