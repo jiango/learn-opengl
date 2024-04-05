@@ -11,3 +11,7 @@ n 为 2,3,4
 
 
 
+glVertexAttribPointer的最后参数，偏移量是字节偏移量，本例子中为0和3*sizeof(float)
+
+# Next P16 
+https://www.bilibili.com/video/BV1UL411W71w?p=16&vd_source=b3e9695e5fb2c87f4dba5c815f59a0c3
