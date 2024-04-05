@@ -1,3 +1,4 @@
-./idea
 cmake-build-debug-mingw/
 bin/
+.idea/
+cmake-build-debug/
